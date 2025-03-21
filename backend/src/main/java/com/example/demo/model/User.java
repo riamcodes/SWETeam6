@@ -1,3 +1,6 @@
+package com.example.demo.model;
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -33,5 +36,9 @@ public class User {
         this.role = role;
     }
 
-    // ... other getters and setters ...
+    public String getEmail() { return email; }
+
+    public String getPassword() { return password; }
+
+    public String getName() { return name; }
 } 
