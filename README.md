@@ -15,6 +15,8 @@ Before running this project, make sure you have the following installed:
 
 1. Install MySQL and start the MySQL service
 2. Create a new database:
+```sql
+   CREATE DATABASE swesprint;
 ```
 
 ## Backend Setup
@@ -30,7 +32,19 @@ cd Sprint1
 cd backend
 ```
 
-3. Run the Spring Boot application:
+3. Setup application.properties
+   - A sample file is provided at `backend/src/main/resources/application-sample.properties`
+   - Copy the file and fill in your credentials
+   ```
+   cp src/main/resources/application-sample.properties src/main/resources/application.properties
+   ```
+   - Edit application.properties to include your MySQL username and password
+   ```
+   spring.datasource.username=yourUsername
+   spring.datasource.password=yourPassword
+   ```
+
+4. Run the Spring Boot application:
 ```bash
 ./gradlew bootRun
 ```
@@ -100,5 +114,3 @@ git push origin feature/your-feature-name
 - User registration (Researcher, Student, Sponsor roles)
 - Research project management
 - Funding opportunities
-
-3. Update database credentials in `backend/src/main/resources/application.properties` if needed
