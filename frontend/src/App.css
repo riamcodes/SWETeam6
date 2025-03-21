@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.auth-toggle {
+  margin: 20px 0;
+}
+
+.register-form, .login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
