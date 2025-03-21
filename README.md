@@ -1,1 +1,104 @@
 # Sprint1
+# Research Management System
+
+A full-stack application for managing research projects, built with Spring Boot and React.
+
+## Prerequisites
+
+Before running this project, make sure you have the following installed:
+- Java JDK 17 or higher
+- Node.js and npm (Node Package Manager)
+- MySQL Server
+- Git
+
+## Database Setup
+
+1. Install MySQL and start the MySQL service
+2. Create a new database:
+```
+
+## Backend Setup
+
+1. Clone the repository:
+```bash
+git clone [your-repository-url]
+cd Sprint1
+```
+
+2. Navigate to backend directory:
+```bash
+cd backend
+```
+
+3. Run the Spring Boot application:
+```bash
+./gradlew bootRun
+```
+- For Windows users: use `gradlew.bat bootRun`
+- The backend will start on http://localhost:8080
+
+## Frontend Setup
+
+1. Open a new terminal and navigate to frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the React development server:
+```bash
+npm start
+```
+- The frontend will start on http://localhost:3000
+
+## Verifying the Setup
+
+1. Once both servers are running, visit http://localhost:3000 in your browser
+2. You should see the Research Management System page
+3. If you see "Hello from backend!", the connection is working properly
+
+## Common Issues
+
+1. If MySQL connection fails:
+   - Verify MySQL is running
+   - Check credentials in application.properties
+   - Ensure database 'swesprint' exists
+
+2. If npm install fails:
+   - Clear npm cache: `npm cache clean --force`
+   - Delete node_modules folder and try again
+
+## Contributing
+
+1. Create a new branch for your feature:
+```bash
+git checkout -b feature/your-feature-name
+```
+
+2. Make your changes and commit:
+```bash
+git add .
+git commit -m "Description of changes"
+```
+
+3. Push to your branch:
+```bash
+git push origin feature/your-feature-name
+```
+
+4. Create a Pull Request on GitHub
+
+## Current Features
+- Basic frontend-backend connection
+- MySQL database integration
+
+## Coming Soon
+- User registration (Researcher, Student, Sponsor roles)
+- Research project management
+- Funding opportunities
+
+3. Update database credentials in `backend/src/main/resources/application.properties` if needed
