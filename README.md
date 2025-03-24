@@ -1,6 +1,8 @@
 # Sprint1
-# Research Management System
+### Team 6: Researchers Expertise Publishment
+Ria Mukherji, Zareenah Murad, Serap Ogut, Claudia Pinkerton
 
+# Research Management System
 A full-stack application for managing research projects, built with Spring Boot and React.
 
 ## Prerequisites
