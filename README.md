@@ -1,9 +1,18 @@
 # Sprint1
-### Team 6: Researchers Expertise Publishment
-Ria Mukherji, Zareenah Murad, Serap Ogut, Claudia Pinkerton
 
 # Research Management System
 A full-stack application for managing research projects, built with Spring Boot and React.
+
+***
+
+## Team 6: Researchers Expertise Publishment
+Ria Mukherji, Zareenah Murad, Serap Ogut, Claudia Pinkerton
+
+## Sprint Goals & Features Implemented
+Setup basic frontend-backend connection and integrate MySQL database.
+Users can register and create an account based on their role (Researcher, Student, Sponsor). Users are stored in the database, allowing for users to log in to the system using their email and chosen password. 
+
+***
 
 ## Prerequisites
 
@@ -113,6 +122,5 @@ git push origin feature/your-feature-name
 - MySQL database integration
 
 ## Coming Soon
-- User registration (Researcher, Student, Sponsor roles)
 - Research project management
 - Funding opportunities
