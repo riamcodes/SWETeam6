@@ -56,6 +56,10 @@ function Login() {
                 <button type="submit">Login</button>
             </form>
             {message && <p className={message.includes('Welcome') ? 'success' : 'error'}>{message}</p>}
+            {message.includes('Welcome') && (
+                <button className="home-button">Go To Homepage</button>
+            )}
+            <p>Don't have an account? <a href="/register">Register here</a></p>
         </div>
     );
 }
