@@ -3,21 +3,61 @@ import axios from 'axios';
 
 function ViewListings({ onClose }) {
     const [listings, setListings] = useState([]);
-    
+    const [sortedListings, setSortedListings] = useState([]);
+    const [showDateInput, setShowDateInput] = useState(false);
+    const [dateFilter, setDateFilter] = useState('');
+    const [showStudents, setShowStudents] = useState(false);
+    const [showSponsors, setShowSponsors] = useState(false);
+
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                console.log('Fetching listings...');
                 const response = await axios.get('http://localhost:8080/api/research/all');
-                console.log('Received listings:', response.data);
                 setListings(response.data);
+                setSortedListings(response.data);
             } catch (error) {
                 console.error('Error fetching listings:', error);
             }
         };
-
         fetchListings();
     }, []);
+
+    const handleDateSort = () => {
+        setShowDateInput(!showDateInput);
+        if (!showDateInput) {
+            setShowStudents(false);
+            setShowSponsors(false);
+        }
+    };
+
+    const handleDateFilter = (date) => {
+        const filtered = listings.filter(listing => listing.start_date === date);
+        setSortedListings(filtered);
+    };
+
+    const handleStudentsSort = () => {
+        setShowStudents(!showStudents);
+        if (!showStudents) {
+            setShowDateInput(false);
+            setShowSponsors(false);
+            const filtered = listings.filter(listing => listing.needs_students);
+            setSortedListings(filtered);
+        } else {
+            setSortedListings(listings);
+        }
+    };
+
+    const handleSponsorsSort = () => {
+        setShowSponsors(!showSponsors);
+        if (!showSponsors) {
+            setShowDateInput(false);
+            setShowStudents(false);
+            const filtered = listings.filter(listing => listing.needs_sponsors);
+            setSortedListings(filtered);
+        } else {
+            setSortedListings(listings);
+        }
+    };
 
     return (
         <div style={{
@@ -35,11 +75,43 @@ function ViewListings({ onClose }) {
             overflowY: 'auto'
         }}>
             <h2>Research Listings</h2>
-            {listings.length === 0 ? (
+            <div style={{ marginBottom: '20px' }}>
+                <label style={{ marginRight: '20px' }}>
+                    <input 
+                        type="checkbox" 
+                        onChange={handleDateSort}
+                        checked={showDateInput}
+                    /> Sort by Date
+                </label>
+                <label style={{ marginRight: '20px' }}>
+                    <input 
+                        type="checkbox" 
+                        onChange={handleStudentsSort}
+                        checked={showStudents}
+                    /> Show Needs Students
+                </label>
+                <label>
+                    <input 
+                        type="checkbox" 
+                        onChange={handleSponsorsSort}
+                        checked={showSponsors}
+                    /> Show Needs Sponsors
+                </label>
+                {showDateInput && (
+                    <input 
+                        type="date" 
+                        onChange={(e) => handleDateFilter(e.target.value)}
+                        value={dateFilter}
+                        style={{ marginLeft: '10px' }}
+                    />
+                )}
+            </div>
+            
+            {sortedListings.length === 0 ? (
                 <p>No listings found</p>
             ) : (
-                listings.map((listing) => (
-                    <div key={listing.id} style={{
+                sortedListings.map((listing) => (
+                    <div key={listing.listing_id} style={{
                         border: '1px solid #ddd',
                         padding: '10px',
                         margin: '10px 0',
