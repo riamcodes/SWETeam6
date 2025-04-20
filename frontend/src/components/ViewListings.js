@@ -76,7 +76,8 @@ function ViewListings({ onClose }) {
         if (keyword) {
             filtered = filtered.filter(listing => 
                 listing.description.toLowerCase().includes(keyword.toLowerCase()) ||
-                listing.project_name.toLowerCase().includes(keyword.toLowerCase())
+                listing.project_name.toLowerCase().includes(keyword.toLowerCase()) ||
+                listing.listing_id.toString().includes(keyword)
             );
         }
         if (showStudents) {
@@ -97,7 +98,7 @@ function ViewListings({ onClose }) {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            backgroundColor: 'white',
+            backgroundColor: '#ffebee',  // Light pink background
             padding: '20px',
             borderRadius: '8px',
             boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
@@ -142,7 +143,7 @@ function ViewListings({ onClose }) {
             <div style={{ marginBottom: '20px' }}>
                 <input
                     type="text"
-                    placeholder="Search by title or keywords in description..."
+                    placeholder="Search by title, description, or listing ID..."
                     value={searchKeyword}
                     onChange={(e) => handleKeywordSearch(e.target.value)}
                     style={{
@@ -163,13 +164,19 @@ function ViewListings({ onClose }) {
                         border: '1px solid #ddd',
                         padding: '10px',
                         margin: '10px 0',
-                        borderRadius: '4px'
+                        borderRadius: '4px',
+                        backgroundColor: 'white'
                     }}>
                         <h3>{listing.project_name}</h3>
                         <p>Description: {listing.description}</p>
                         <p>Start Date: {listing.start_date}</p>
                         <p>Needs Students: {listing.needs_students ? 'Yes' : 'No'}</p>
                         <p>Needs Sponsors: {listing.needs_sponsors ? 'Yes' : 'No'}</p>
+                        <p style={{ 
+                            color: '#666',
+                            fontSize: '0.9em',
+                            marginTop: '10px'
+                        }}>Research ID: {listing.listing_id}</p>
                     </div>
                 ))
             )}
