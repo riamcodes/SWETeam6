@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Login() {
+function Login({ onHomeClick }) {
     // Define state variables
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
     const [message, setMessage] = useState('');
+    const [userData, setUserData] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,6 +22,7 @@ function Login() {
             const response = await axios.post('http://localhost:8080/api/users/login', formData);
             console.log('Login successful:', response.data);
             setMessage(`Welcome ${response.data.name}! (${response.data.role})`);
+            setUserData(response.data);
         } catch (error) {
             console.error('Login failed:', {
                 status: error.response?.status,
@@ -57,9 +59,13 @@ function Login() {
             </form>
             {message && <p className={message.includes('Welcome') ? 'success' : 'error'}>{message}</p>}
             {message.includes('Welcome') && (
-                <button className="home-button">Go To Homepage</button>
+                <button 
+                    className="home-button" 
+                    onClick={() => onHomeClick(userData)}
+                >
+                    Go To Homepage
+                </button>
             )}
-            <p>Don't have an account? <a href="/register">Register here</a></p>
         </div>
     );
 }
