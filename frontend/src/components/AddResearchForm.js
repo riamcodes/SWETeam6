@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-function AddResearchForm({ onClose }) {
+function AddResearchForm({ onClose, user }) {
     const [formData, setFormData] = useState({
         project_name: '',
         description: '',
@@ -9,11 +10,28 @@ function AddResearchForm({ onClose }) {
         needs_sponsors: false
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // We'll implement the submission logic later
-        console.log('Form submitted:', formData);
-        onClose();
+        try {
+            console.log('User object:', user);  // Log the entire user object
+            const dataToSend = {
+                project_name: formData.project_name,
+                description: formData.description,
+                start_date: formData.start_date,
+                needs_students: formData.needs_students,
+                needs_sponsors: formData.needs_sponsors,
+                email: user.email
+            };
+            console.log('Data being sent:', JSON.stringify(dataToSend, null, 2));  // Pretty print the data
+            
+            await axios.post('http://localhost:8080/api/research/add', dataToSend);
+            alert('Research listing added successfully!');
+            onClose();
+        } catch (error) {
+            console.error('Full error object:', error);
+            console.error('Error response:', error.response?.data);
+            alert('Error adding research listing: ' + error.message);
+        }
     };
 
     return (

@@ -85,7 +85,7 @@ function Home({ user, onLogout }) {
                     Trends
                 </button>
             </div>
-            {showAddForm && <AddResearchForm onClose={() => setShowAddForm(false)} />}
+            {showAddForm && <AddResearchForm onClose={() => setShowAddForm(false)} user={user} />}
         </div>
     );
 }
