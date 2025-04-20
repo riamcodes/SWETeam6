@@ -38,4 +38,4 @@ out/
 
 # Spring Boot config
 **/application.properties
-
+application.properties 
