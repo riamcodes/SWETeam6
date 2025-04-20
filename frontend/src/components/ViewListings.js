@@ -75,7 +75,8 @@ function ViewListings({ onClose }) {
         
         if (keyword) {
             filtered = filtered.filter(listing => 
-                listing.description.toLowerCase().includes(keyword.toLowerCase())
+                listing.description.toLowerCase().includes(keyword.toLowerCase()) ||
+                listing.project_name.toLowerCase().includes(keyword.toLowerCase())
             );
         }
         if (showStudents) {
@@ -141,7 +142,7 @@ function ViewListings({ onClose }) {
             <div style={{ marginBottom: '20px' }}>
                 <input
                     type="text"
-                    placeholder="Search by keywords in description..."
+                    placeholder="Search by title or keywords in description..."
                     value={searchKeyword}
                     onChange={(e) => handleKeywordSearch(e.target.value)}
                     style={{
