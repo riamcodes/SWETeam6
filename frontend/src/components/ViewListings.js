@@ -31,32 +31,49 @@ function ViewListings({ onClose }) {
     };
 
     const handleDateFilter = (date) => {
-        const filtered = listings.filter(listing => listing.start_date === date);
+        let filtered = listings;
+        if (date) {
+            filtered = filtered.filter(listing => listing.start_date === date);
+        }
+        if (showStudents) {
+            filtered = filtered.filter(listing => listing.needs_students);
+        }
+        if (showSponsors) {
+            filtered = filtered.filter(listing => listing.needs_sponsors);
+        }
         setSortedListings(filtered);
     };
 
     const handleStudentsSort = () => {
         setShowStudents(!showStudents);
+        let filtered = listings;
+        
         if (!showStudents) {
-            setShowDateInput(false);
-            setShowSponsors(false);
-            const filtered = listings.filter(listing => listing.needs_students);
-            setSortedListings(filtered);
-        } else {
-            setSortedListings(listings);
+            filtered = filtered.filter(listing => listing.needs_students);
         }
+        if (showSponsors) {
+            filtered = filtered.filter(listing => listing.needs_sponsors);
+        }
+        if (dateFilter) {
+            filtered = filtered.filter(listing => listing.start_date === dateFilter);
+        }
+        setSortedListings(filtered);
     };
 
     const handleSponsorsSort = () => {
         setShowSponsors(!showSponsors);
+        let filtered = listings;
+        
         if (!showSponsors) {
-            setShowDateInput(false);
-            setShowStudents(false);
-            const filtered = listings.filter(listing => listing.needs_sponsors);
-            setSortedListings(filtered);
-        } else {
-            setSortedListings(listings);
+            filtered = filtered.filter(listing => listing.needs_sponsors);
         }
+        if (showStudents) {
+            filtered = filtered.filter(listing => listing.needs_students);
+        }
+        if (dateFilter) {
+            filtered = filtered.filter(listing => listing.start_date === dateFilter);
+        }
+        setSortedListings(filtered);
     };
 
     return (
