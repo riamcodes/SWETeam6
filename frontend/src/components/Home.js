@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import AddResearchForm from './AddResearchForm';
+import ViewListings from './ViewListings';
 
 function Home({ user, onLogout }) {
     const [showAddForm, setShowAddForm] = useState(false);
+    const [showViewListings, setShowViewListings] = useState(false);
 
     return (
         <div>
@@ -61,15 +63,21 @@ function Home({ user, onLogout }) {
                     </div>
                 )}
                 
-                <button style={{
-                    padding: '10px 20px',
-                    margin: '10px',
-                    backgroundColor: '#008CBA',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                }}>
+                <button 
+                    onClick={() => {
+                        console.log('View Listings clicked');
+                        setShowViewListings(true);
+                    }}
+                    style={{
+                        padding: '10px 20px',
+                        margin: '10px',
+                        backgroundColor: '#008CBA',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                    }}
+                >
                     View Listings
                 </button>
                 
@@ -86,6 +94,9 @@ function Home({ user, onLogout }) {
                 </button>
             </div>
             {showAddForm && <AddResearchForm onClose={() => setShowAddForm(false)} user={user} />}
+            {showViewListings && (
+                <ViewListings onClose={() => setShowViewListings(false)} />
+            )}
         </div>
     );
 }
