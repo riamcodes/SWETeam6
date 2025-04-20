@@ -12,7 +12,10 @@ function App() {
     <div className="App">
       <h1>Research Management System</h1>
       {currentPage === 'home' ? (
-        <Home user={userData} />
+        <Home 
+          user={userData} 
+          onLogout={() => setCurrentPage('login')}
+        />
       ) : (
         <>
           <button onClick={() => setCurrentPage('login')}>Login</button>

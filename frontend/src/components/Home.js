@@ -1,8 +1,28 @@
 import React from 'react';
 
-function Home({ user }) {
+function Home({ user, onLogout }) {
     return (
-        <div className="home-page">
+        <div>
+            <div style={{
+                position: 'absolute',
+                top: '20px',
+                right: '20px'
+            }}>
+                <button 
+                    onClick={onLogout}
+                    style={{
+                        padding: '8px 16px',
+                        backgroundColor: '#f44336',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Log Out
+                </button>
+            </div>
+
             <h2>Welcome to Your Dashboard</h2>
             <div className="user-info">
                 <p><strong>Name:</strong> {user.name}</p>
