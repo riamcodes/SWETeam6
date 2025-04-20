@@ -8,6 +8,7 @@ function ViewListings({ onClose }) {
     const [dateFilter, setDateFilter] = useState('');
     const [showStudents, setShowStudents] = useState(false);
     const [showSponsors, setShowSponsors] = useState(false);
+    const [searchKeyword, setSearchKeyword] = useState('');
 
     useEffect(() => {
         const fetchListings = async () => {
@@ -46,29 +47,42 @@ function ViewListings({ onClose }) {
 
     const handleStudentsSort = () => {
         setShowStudents(!showStudents);
-        let filtered = listings;
-        
         if (!showStudents) {
-            filtered = filtered.filter(listing => listing.needs_students);
+            setShowDateInput(false);
+            setShowSponsors(false);
+            const filtered = listings.filter(listing => listing.needs_students);
+            setSortedListings(filtered);
+        } else {
+            setSortedListings(listings);
         }
-        if (showSponsors) {
-            filtered = filtered.filter(listing => listing.needs_sponsors);
-        }
-        if (dateFilter) {
-            filtered = filtered.filter(listing => listing.start_date === dateFilter);
-        }
-        setSortedListings(filtered);
     };
 
     const handleSponsorsSort = () => {
         setShowSponsors(!showSponsors);
+        if (!showSponsors) {
+            setShowDateInput(false);
+            setShowStudents(false);
+            const filtered = listings.filter(listing => listing.needs_sponsors);
+            setSortedListings(filtered);
+        } else {
+            setSortedListings(listings);
+        }
+    };
+
+    const handleKeywordSearch = (keyword) => {
+        setSearchKeyword(keyword);
         let filtered = listings;
         
-        if (!showSponsors) {
-            filtered = filtered.filter(listing => listing.needs_sponsors);
+        if (keyword) {
+            filtered = filtered.filter(listing => 
+                listing.description.toLowerCase().includes(keyword.toLowerCase())
+            );
         }
         if (showStudents) {
             filtered = filtered.filter(listing => listing.needs_students);
+        }
+        if (showSponsors) {
+            filtered = filtered.filter(listing => listing.needs_sponsors);
         }
         if (dateFilter) {
             filtered = filtered.filter(listing => listing.start_date === dateFilter);
@@ -122,6 +136,22 @@ function ViewListings({ onClose }) {
                         style={{ marginLeft: '10px' }}
                     />
                 )}
+            </div>
+            
+            <div style={{ marginBottom: '20px' }}>
+                <input
+                    type="text"
+                    placeholder="Search by keywords in description..."
+                    value={searchKeyword}
+                    onChange={(e) => handleKeywordSearch(e.target.value)}
+                    style={{
+                        width: '100%',
+                        padding: '8px',
+                        marginTop: '10px',
+                        borderRadius: '4px',
+                        border: '1px solid #ddd'
+                    }}
+                />
             </div>
             
             {sortedListings.length === 0 ? (
