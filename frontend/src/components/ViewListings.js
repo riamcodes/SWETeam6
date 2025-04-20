@@ -165,21 +165,18 @@ function ViewListings({ onClose }) {
                         padding: '10px',
                         margin: '10px 0',
                         borderRadius: '4px',
-                        backgroundColor: 'white'
+                        backgroundColor: 'white',
+                        textAlign: 'center'
                     }}>
                         <h3>{listing.project_name}</h3>
                         <p>Description: {listing.description}</p>
                         <p>Start Date: {listing.start_date}</p>
                         <p>Needs Students: {listing.needs_students ? 'Yes' : 'No'}</p>
                         <p>Needs Sponsors: {listing.needs_sponsors ? 'Yes' : 'No'}</p>
-                        <p style={{ 
-                            color: '#666',
-                            fontSize: '0.9em',
-                            marginTop: '10px'
-                        }}>Research ID: {listing.listing_id}</p>
-                        
+                        <p style={{ color: '#666', fontSize: '0.9em' }}>Research ID: {listing.listing_id}</p>
+                        <p style={{ color: '#666', fontSize: '0.9em' }}>Principal Investigator: {listing.researcher_name || 'Not Available'}</p>
                         <button 
-                            onClick={() => window.location.href = `mailto:${listing.researcher_email}?subject=Research Inquiry: ${listing.project_name}`}
+                            onClick={() => window.location.href = `mailto:admin@research.com?subject=Research Inquiry: ${listing.project_name}`}
                             style={{
                                 padding: '8px 16px',
                                 backgroundColor: '#0088cc',

@@ -76,10 +76,10 @@ public class ResearchListingController {
 
     @GetMapping("/all")
     public List<Map<String, Object>> getAllListings() {
-        System.out.println("Getting all listings..."); // Debug log
-        String sql = "SELECT * FROM research_listings";
-        List<Map<String, Object>> results = jdbcTemplate.queryForList(sql);
-        System.out.println("Found listings: " + results); // Debug log
-        return results;
+        String sql = "SELECT rl.*, u.name as researcher_name " +
+                     "FROM research_listings rl " +
+                     "LEFT JOIN users u ON rl.user_id = u.id " +
+                     "ORDER BY rl.listing_id";
+        return jdbcTemplate.queryForList(sql);
     }
 } 
