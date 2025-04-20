@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AddResearchForm from './AddResearchForm';
 
 function Home({ user, onLogout }) {
+    const [showAddForm, setShowAddForm] = useState(false);
+
     return (
         <div>
             <div style={{
@@ -8,17 +11,14 @@ function Home({ user, onLogout }) {
                 top: '20px',
                 right: '20px'
             }}>
-                <button 
-                    onClick={onLogout}
-                    style={{
-                        padding: '8px 16px',
-                        backgroundColor: '#f44336',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: 'pointer'
-                    }}
-                >
+                <button onClick={onLogout} style={{
+                    padding: '8px 16px',
+                    backgroundColor: '#f44336',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer'
+                }}>
                     Log Out
                 </button>
             </div>
@@ -39,7 +39,7 @@ function Home({ user, onLogout }) {
                         border: 'none',
                         borderRadius: '4px',
                         cursor: 'pointer'
-                    }}>
+                    }} onClick={() => setShowAddForm(true)}>
                         Add Listing
                     </button>
                 ) : (
@@ -85,6 +85,7 @@ function Home({ user, onLogout }) {
                     Trends
                 </button>
             </div>
+            {showAddForm && <AddResearchForm onClose={() => setShowAddForm(false)} />}
         </div>
     );
 }
