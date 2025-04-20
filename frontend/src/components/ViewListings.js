@@ -177,6 +177,21 @@ function ViewListings({ onClose }) {
                             fontSize: '0.9em',
                             marginTop: '10px'
                         }}>Research ID: {listing.listing_id}</p>
+                        
+                        <button 
+                            onClick={() => window.location.href = `mailto:${listing.researcher_email}?subject=Research Inquiry: ${listing.project_name}`}
+                            style={{
+                                padding: '8px 16px',
+                                backgroundColor: '#0088cc',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                marginTop: '10px'
+                            }}
+                        >
+                            Contact Researcher
+                        </button>
                     </div>
                 ))
             )}
