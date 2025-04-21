@@ -1,124 +1,123 @@
 # Research Management System
-A full-stack application for managing research projects, built with Spring Boot and React.
+A full-stack web application for managing research projects, built with **Spring Boot (Java)**, **React (JavaScript)**, and **MySQL**, all containerized with **Docker**.
+---
 
-***
+## Team 6:
+- Ria Mukherji  
+- Zareenah Murad  
+- Serap Ogut  
+- Claudia Pinkerton
 
-## Team 6: Researchers Expertise Publishment
-Ria Mukherji, Zareenah Murad, Serap Ogut, Claudia Pinkerton
+---
 
-## Sprint Goals & Features Implemented
-Setup basic frontend-backend connection and integrate MySQL database.
-Users can register and create an account based on their role (Researcher, Student, Sponsor). Users are stored in the database, allowing for users to log in to the system using their email and chosen password. 
+## Features Implemented
 
-***
+- Full-stack connection between frontend (React) and backend (Spring Boot)
+- MySQL integration with Docker Compose
+- User registration and authentication by role: **Researcher**, **Student**, or **Sponsor**
+- Each user is stored in the MySQL database
+- Users can log in using their email and password
+
+---
 
 ## Prerequisites
 
-Before running this project, make sure you have the following installed:
-- Java JDK 17 or higher
-- Node.js and npm (Node Package Manager)
-- MySQL Server
-- Git
+Make sure you have the following installed:
 
-## Database Setup
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Git](https://git-scm.com/)
+- (Optional) [Java 17+](https://adoptopenjdk.net/) and [Node.js](https://nodejs.org/) if running outside Docker
 
-1. Install MySQL and start the MySQL service
-2. Create a new database:
-```sql
-   CREATE DATABASE swesprint;
-```
+---
 
-## Backend Setup
+## 🛠️ Project Setup (Using Docker)
 
-1. Clone the repository:
+### 1. Clone the repository
+
 ```bash
-git clone [your-repository-url]
+git clone [repository-url]
 cd Sprint1
 ```
 
-2. Navigate to backend directory:
+### 2. Start the app using Docker Compose
+
+```bash
+docker-compose up --build -d
+```
+
+- This builds and starts the **backend**, **frontend**, and **MySQL database**
+- The backend will run at: [http://localhost:8080](http://localhost:8080)
+- The frontend will run at: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🧪 Verifying the Setup
+
+1. Visit [http://localhost:3000](http://localhost:3000)
+2. Register or log in with a role-specific account
+3. If backend is working, you should be able to fetch/post data to the database
+
+---
+
+## 🧱 Database Info
+
+- MySQL runs in Docker and exposes port `3307` to avoid conflicts
+- Default credentials:
+  - **Database**: `cshub`
+  - **User**: `root`
+  - **Password**: `password`
+- Tables are created using a `schema.sql` file run by Spring Boot on startup
+
+---
+
+## 🐞 Common Issues
+
+### Problem: Backend can't connect to database
+- Ensure Docker is running
+- Confirm you're using `jdbc:mysql://db:3306/cshub` inside Spring Boot config
+
+### Problem: Table not found
+- Make sure `schema.sql` exists in `backend/src/main/resources/`
+- Check that `spring.sql.init.mode=always` is set in `application.properties`
+
+---
+
+## 🔧 Development Notes (Without Docker)
+
+If needed, you can still run frontend/backend independently:
+
+### Backend
+
 ```bash
 cd backend
-```
-
-3. Setup application.properties
-   - A sample file is provided at `backend/src/main/resources/application-sample.properties`
-   - Copy the file and fill in your credentials
-   ```
-   cp src/main/resources/application-sample.properties src/main/resources/application.properties
-   ```
-   - Edit application.properties to include your MySQL username and password
-   ```
-   spring.datasource.username=yourUsername
-   spring.datasource.password=yourPassword
-   ```
-
-4. Run the Spring Boot application:
-```bash
 ./gradlew bootRun
 ```
-- For Windows users: use `gradlew.bat bootRun`
-- The backend will start on http://localhost:8080
 
-## Frontend Setup
+### Frontend
 
-1. Open a new terminal and navigate to frontend directory:
 ```bash
 cd frontend
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
-
-3. Start the React development server:
-```bash
 npm start
 ```
-- The frontend will start on http://localhost:3000
 
-## Verifying the Setup
-
-1. Once both servers are running, visit http://localhost:3000 in your browser
-2. You should see the Research Management System page
-3. If you see "Hello from backend!", the connection is working properly
-
-## Common Issues
-
-1. If MySQL connection fails:
-   - Verify MySQL is running
-   - Check credentials in application.properties
-   - Ensure database 'swesprint' exists
-
-2. If npm install fails:
-   - Clear npm cache: `npm cache clean --force`
-   - Delete node_modules folder and try again
+---
 
 ## Contributing
 
-1. Create a new branch for your feature:
+1. Create a feature branch:
 ```bash
-git checkout -b feature/your-feature-name
+git checkout -b feature/your-feature
 ```
 
-2. Make your changes and commit:
+2. Commit and push:
 ```bash
 git add .
-git commit -m "Description of changes"
+git commit -m "Add new feature"
+git push origin feature/your-feature
 ```
 
-3. Push to your branch:
-```bash
-git push origin feature/your-feature-name
-```
+3. Open a Pull Request on GitHub
 
-4. Create a Pull Request on GitHub
+---
 
-## Current Features
-- Basic frontend-backend connection
-- MySQL database integration
-
-## Coming Soon
-- Research project management
-- Funding opportunities
