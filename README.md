@@ -1,5 +1,3 @@
-# Sprint1
-
 # Research Management System
 A full-stack application for managing research projects, built with Spring Boot and React.
 
