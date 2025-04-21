@@ -1,6 +1,6 @@
 # Research Management System
+
 A full-stack web application for managing research projects, built with **Spring Boot (Java)**, **React (JavaScript)**, and **MySQL**, all containerized with **Docker**.
----
 
 ## Team 6:
 - Ria Mukherji  
@@ -51,7 +51,7 @@ docker-compose up --build -d
 
 ---
 
-## 🧪 Verifying the Setup
+## Verifying the Setup
 
 1. Visit [http://localhost:3000](http://localhost:3000)
 2. Register or log in with a role-specific account
@@ -59,7 +59,7 @@ docker-compose up --build -d
 
 ---
 
-## 🧱 Database Info
+## Database Info
 
 - MySQL runs in Docker and exposes port `3307` to avoid conflicts
 - Default credentials:
@@ -70,7 +70,7 @@ docker-compose up --build -d
 
 ---
 
-## 🐞 Common Issues
+## Common Issues
 
 ### Problem: Backend can't connect to database
 - Ensure Docker is running
