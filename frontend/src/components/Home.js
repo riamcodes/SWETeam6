@@ -5,8 +5,9 @@ import ViewListings from './ViewListings';
 function Home({ user, onLogout }) {
     const [showAddForm, setShowAddForm] = useState(false);
     const [showViewListings, setShowViewListings] = useState(false);
-    const [trends, setTrends] = useState([]); // <-- new: state to hold fetched trends
-    const [showTrends, setShowTrends] = useState(false); // <-- new: control trends visibility
+    const [trends, setTrends] = useState([]);
+    const [showTrends, setShowTrends] = useState(false);
+    const [lastUpdated, setLastUpdated] = useState(null);
 
     const fetchTrends = () => {
         fetch('http://localhost:8080/trends')
@@ -14,6 +15,7 @@ function Home({ user, onLogout }) {
             .then(data => {
                 console.log('Fetched trends:', data);
                 setTrends(data);
+                setLastUpdated(new Date().toLocaleString());
                 setShowTrends(true);
             })
             .catch(error => {
@@ -23,6 +25,7 @@ function Home({ user, onLogout }) {
 
     return (
         <div>
+            {/* Log Out Button */}
             <div style={{
                 position: 'absolute',
                 top: '20px',
@@ -46,6 +49,7 @@ function Home({ user, onLogout }) {
                 <p><strong>Role:</strong> {user.role}</p>
             </div>
 
+            {/* Buttons */}
             <div style={{ marginTop: '20px' }}>
                 {user.role === 'RESEARCHER' ? (
                     <button style={{
@@ -82,7 +86,7 @@ function Home({ user, onLogout }) {
                     onClick={() => {
                         console.log('View Listings clicked');
                         setShowViewListings(true);
-                        setShowTrends(false); // hide trends when viewing listings
+                        setShowTrends(false); // Hide trends if viewing listings
                     }}
                     style={{
                         padding: '10px 20px',
@@ -113,16 +117,27 @@ function Home({ user, onLogout }) {
                 </button>
             </div>
 
-            {/* Forms and Listings */}
+            {/* Add Listing Form */}
             {showAddForm && <AddResearchForm onClose={() => setShowAddForm(false)} user={user} />}
+
+            {/* View Listings */}
             {showViewListings && (
                 <ViewListings onClose={() => setShowViewListings(false)} />
             )}
 
-            {/* Display Trends */}
+            {/* Trends Section */}
             {showTrends && (
                 <div style={{ marginTop: '20px' }}>
                     <h3>Research Trends</h3>
+
+                    {/* Last Updated Timestamp */}
+                    {lastUpdated && (
+                        <p style={{ fontSize: '14px', color: '#555', marginTop: '10px' }}>
+                            🕒 Last Updated: {lastUpdated}
+                        </p>
+                    )}
+
+                    {/* Trends List */}
                     <ul style={{ listStyleType: 'none', padding: 0 }}>
                         {trends.map((trend, index) => (
                             <li key={index} style={{
@@ -141,6 +156,4 @@ function Home({ user, onLogout }) {
     );
 }
 
-
 export default Home;
-
