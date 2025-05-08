@@ -11,17 +11,29 @@ function Home({ user, onLogout }) {
 
     const fetchTrends = () => {
         fetch('http://localhost:8080/trends')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log('Fetched trends:', data);
-                setTrends(data);
+                // Expecting an array from backend
+                if (Array.isArray(data)) {
+                    setTrends(data);
+                } else {
+                    console.warn('Unexpected data format:', data);
+                    setTrends([]); // fallback
+                }
                 setLastUpdated(new Date().toLocaleString());
                 setShowTrends(true);
             })
             .catch(error => {
                 console.error('Error fetching trends:', error);
+                setTrends([]); // prevent crash
             });
-    };
+    };     
 
     return (
         <div>
@@ -139,17 +151,11 @@ function Home({ user, onLogout }) {
 
                     {/* Trends List */}
                     <ul style={{ listStyleType: 'none', padding: 0 }}>
-                        {trends.map((trend, index) => (
-                            <li key={index} style={{
-                                background: '#e0f7fa',
-                                margin: '5px 0',
-                                padding: '10px',
-                                borderRadius: '5px'
-                            }}>
-                                {trend}
-                            </li>
+                        {Array.isArray(trends) && trends.map((trend, index) => (
+                            <li key={index}>{trend}</li>
                         ))}
-                    </ul>
+                        </ul>
+
                 </div>
             )}
         </div>
