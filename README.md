@@ -17,6 +17,11 @@ A full-stack web application for managing research projects, built with **Spring
 - User registration and authentication by role: **Researcher**, **Student**, or **Sponsor**
 - Each user is stored in the MySQL database
 - Users can log in using their email and password
+- Users can view trending research topics, including a "Last Updated" timestamp to know how recent the information is
+- Users can view a graph showing when the last research entry was posted
+- Researchers can publish their expertise, and edit/update postings as needed
+- Students and sponsors can search/sort through research listings
+- Students and sponsors can contact researchers through the platform
 
 ---
 
